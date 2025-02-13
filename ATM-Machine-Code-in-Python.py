@@ -3,7 +3,7 @@ import time
 print("\n----------------------------Welcome to the Anonymous Bank-------------------------------")
 print("\nPlease Insert your ATM Card")
 
-time.sleep(3)  # Simulating card reading delay
+time.sleep(5)  # Simulating card reading delay
 
 pin = 1234  # Default PIN
 balance = 200  # Initial balance
@@ -29,7 +29,7 @@ for i in range(attempts):
             # **Deposit Money**
             if option == 1:
                 money = int(input("Enter amount to deposit: "))
-                balance += money
+                balance = balance + money
                 print(f"\nNow your balance is ${balance}")
 
                 # Log transaction
@@ -42,7 +42,7 @@ for i in range(attempts):
             elif option == 2:
                 money = int(input("Enter amount to withdraw: "))
                 if money <= balance:
-                    balance -= money
+                    balance = balance - money
                     print(f"\nYou withdrew ${money}.")
                     print(f"Remaining balance: ${balance}")
 
@@ -58,6 +58,7 @@ for i in range(attempts):
             # **Check Balance**
             elif option == 3:
                 print(f"\nYour current balance is: ${balance}")
+                print("Your Balance details has been written in the File named Transaction.txt")
 
                 # Log transaction
                 with open("transactions.txt", "a") as file:
@@ -79,6 +80,6 @@ for i in range(attempts):
     else:
         print("\nIncorrect PIN. Try again.")
         if i == attempts - 1:
-            print("\nToo many failed attempts! Your account is locked.")
+            print("\nToo many failed attempts! Your account is locked. If it's you than Please visit the Bank.")
             with open("transactions.txt", "a") as file:
                 file.write("Failed Login Attempt\n")
